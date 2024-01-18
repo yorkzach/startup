@@ -1,3 +1,7 @@
 # Elevator Pitch:
 
-In an age of cancel culture what you can say online is a shifting target that can be very hard to hit. Wouldn't it be nice if we had a tool that can analyze possible social media posts and see if the content would be received positively or poorly? TrendOn is a tool that keeps up with current trends, positive and negative and helps you to avoid the dangers of being cancelled.
+People often regard pets as part of their family. But when they are unable to take care of them or when they travel what should you do with your pets? Dog Watchers is a service to get people to walk, care, watch, love your pets as you would. Don't let your pets get lonely!
+
+## Design:
+
+![Mock](walkerUI.png)
