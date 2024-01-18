@@ -3,9 +3,11 @@ Startup application for CS260
 
 # Elevator Pitch:
 
-People often regard pets as part of their family. But when they are unable to take care of them or when they travel what should you do with your pets? Dog Watchers is a service to get people to walk, care, watch, love your pets as you would. Don't let your pets get lonely!
+People often regard pets as part of their family. But when they are unable to take care of them or when they travel what should you do with your pets? Dog Watchers is a service to get people to walk, care, watch, love your pets as you would. We take care of your dogs as if they were our family. Don't let your pets get lonely!
 
 ## Design:
+
+Simple UI for the main dashboard page:
 
 ![Mock](walkerUI.jpg)
 
@@ -13,7 +15,7 @@ People often regard pets as part of their family. But when they are unable to ta
 
 - Secure login over HTTPS
 - Ability to view walker profiles
-- Display of profiles
+- Display of profiles, and locations
 - Ability to schedule, and contact
 - Displays calender and schedules in real time
 - Ability for a user to lock in their appointment
@@ -23,9 +25,9 @@ People often regard pets as part of their family. But when they are unable to ta
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for application. Three HTML pages. One for home/dashboard and one for profiles and one for scheduling. Hyperlinks to choice artifact.
+- **HTML** - Uses correct HTML structure for application. Three HTML pages. One for home/dashboard and one for profiles/testimonials and one for scheduling. Hyperlinks to choice artifact.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
-- **JavaScript** - Provides login, profile display, scheduling, display other appointments, backend endpoint calls.
+- **JavaScript** - Provides login, profile display, scheduling, display other appointments, display locations and service areas, backend endpoint calls.
 - **Service** - Backend service with endpoints for:
   - login
   - retrieving appointments
