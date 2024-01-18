@@ -4,4 +4,4 @@ People often regard pets as part of their family. But when they are unable to ta
 
 ## Design:
 
-![Mock](walkerUI.png)
+![Mock](walkerUI.jpg)
