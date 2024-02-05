@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calender</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1>Walking Robyn<sup>&reg;</sup></h1>
+
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="calender.html">Calender</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="about.html">About the walkers</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <div class="players">
+        Walker:
+        <span class="player-name">Mystery Walker</span>
+      </div>
+      <ul class="notification">
+        <li class="player-name">Caitlin is scheduled for tomorrow</li>
+        <li class="player-name">Robyn is available this week</li>
+        <li class="player-name">Rachel is scheduled for today</li>
+      </ul>
+
+      <!-- More formatting with old style HTML -->
+      <br />
+
+      <div>
+        <label for="count">Date:</label>
+        <input type="text" id="count" value="--" readonly />
+      </div>
+
+      <br />
+
+      <div>
+        <button>Reset</button>
+      </div>
+
+      <br />
+
+      <div>
+        <button>
+          <img src="https://grabcalendar.com/wp-content/uploads/2021/12/February-2024-Calendar.jpg" width="300" height="200">
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Zach York</span>
+      <br />
+      <a href="https://github.com/yorkzach/startup">My GitHub</a>
+    </footer>
+  </body>
+</html>
