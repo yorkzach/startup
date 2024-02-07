@@ -4,4 +4,4 @@ New domain name is trailoftails.click
 
 
 **Notes**
-My simon code wont go into the proper simon folder!
+remember to change the deliverable destination when pushing to production environment
