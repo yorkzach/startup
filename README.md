@@ -36,3 +36,8 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Store users, schedules, and profiles in database. Register and login users. Credentials securely stored in database. Can't schedule unless authenticated.
 - **WebSocket** - As each user creates appointments, their schedules are broadcast to all other users.
 - **React** - Application ported to use the React web framework.
+
+
+
+**HTML Startup**
+Added 4 files Index, Calender, References, and about that cover the basic HTML structure of the startup. Eventually I will replace the calender with database info corresponding to each individual walker, as well I will use web socket to allow clients to schedule and leave reviews for each walker.
