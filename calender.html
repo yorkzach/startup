@@ -1,84 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Walking Robyn</title>
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walking Robyn</title>
 
-    <link rel="icon" href="icon.png" />
+  <link rel="icon" href="icon.png" />
 
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="calender.css" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="calendar.css" />
 
-    <!-- Include bootstrap CSS framework -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="bg-dark text-light">
-    <header class="container-fluid">
-      <nav class="navbar fixed-top navbar-dark">
-        <a class="navbar-brand" href="#">Walking Robyn<sup>&reg;</sup></a>
-        <menu class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="calender.html">Calender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="references.html">References</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About us</a>
-          </li>
-        </menu>
-      </nav>
-    </header>
+  <!-- Include Bootstrap CSS framework -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+<body class="bg-dark text-light">
+  <header class="container-fluid">
+    <nav class="navbar fixed-top navbar-dark">
+      <a class="navbar-brand" href="#">Walking Robyn<sup>&reg;</sup></a>
+      <menu class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="calendar.html">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="references.html">References</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About us</a>
+        </li>
+      </menu>
+    </nav>
+  </header>
 
-    <main class="container-fluid bg-secondary text-center">
-      <div class="players">
-        Walker:
-        <span class="player-name">Mystery Walker</span>
+  <main class="container-fluid bg-secondary text-center">
+    <div class="calendar-container">
+      <h2>Walker Schedule</h2>
+      <div id="calendar">
+        <div class="calendar-header">
+          <span class="prev-month">&lt;</span>
+          <span class="current-month">February 2024</span>
+          <span class="next-month">&gt;</span>
+        </div>
+        <div class="calendar-days">
+          <div class="day">Sun</div>
+          <div class="day">Mon</div>
+          <div class="day">Tue</div>
+          <div class="day">Wed</div>
+          <div class="day">Thu</div>
+          <div class="day">Fri</div>
+          <div class="day">Sat</div>
+          <!-- Dummy days to fill the calendar -->
+          <div class="dummy-day"></div>
+          <div class="dummy-day"></div>
+          <div class="dummy-day"></div>
+          <div class="dummy-day">1</div>
+          <div class="dummy-day">2</div>
+          <div class="dummy-day">3</div>
+          <div class="dummy-day">4</div>
+          <div class="dummy-day">5</div>
+          <div class="dummy-day">6</div>
+          <div class="dummy-day">7</div>
+          <div class="dummy-day">8</div>
+          <div class="dummy-day">9</div>
+          <div class="dummy-day">10</div>
+          <div class="dummy-day">11</div>
+          <div class="dummy-day">12</div>
+          <div class="dummy-day">13</div>
+          <div class="dummy-day">14</div>
+          <div class="dummy-day">15</div>
+          <div class="dummy-day">16</div>
+          <div class="dummy-day">17</div>
+          <div class="dummy-day">18</div>
+          <div class="dummy-day">19</div>
+          <div class="dummy-day">20</div>
+          <div class="dummy-day">21</div>
+          <div class="dummy-day">22</div>
+          <div class="dummy-day">23</div>
+          <div class="dummy-day">24</div>
+          <div class="dummy-day">25</div>
+          <div class="dummy-day">26</div>
+          <div class="dummy-day">27</div>
+          <div class="dummy-day">28</div>
+          <div class="dummy-day"></div>
+          <div class="dummy-day"></div>
+          <div class="dummy-day"></div>
+        </div>
       </div>
-      <div id="player-messages">
-        <div class="event"><span class="player-event">Walker Caitlin</span> is scheduled for tomorrow</div>
-        <div class="event"><span class="player-event">Walker Robyn </span> is available this week</div>
-        <div class="event"><span class="player-event">Walker Rachel</span> is scheduled for today</div>
-      </div>
+    </div>
 
-      <!-- More formatting with old style HTML -->
-      <br />
+    <div class="player-messages">
+      <div class="event"><span class="player-event">Walker Caitlin</span> is scheduled for tomorrow</div>
+      <div class="event"><span class="player-event">Walker Robyn </span> is available this week</div>
+      <div class="event"><span class="player-event">Walker Rachel</span> is scheduled for today</div>
+    </div>
+  </main>
 
-      <div>
-        <label for="count">Date:</label>
-        <input type="text" id="count" value="--" readonly />
-      </div>
-
-      <br />
-
-      <div>
-        <button>Reset</button>
-      </div>
-
-      <br />
-
-      <div>
-        <button>
-          <img src="https://grabcalendar.com/wp-content/uploads/2021/12/February-2024-Calendar.jpg" width="300" height="200">
-        </button>
-      </div>
-    </main>
-
-    <footer class="bg-dark text-white-50">
-      <div class="container-fluid">
-        <span class="text-reset">Zachary York</span>
-        <a class="text-reset" href="https://github.com/yorkzach/startup">My GitHub</a>
-      </div>
-    </footer>
-  </body>
+  <footer class="bg-dark text-white-50">
+    <div class="container-fluid">
+      <span class="text-reset">Zachary York</span>
+      <a class="text-reset" href="https://github.com/yorkzach/startup">My GitHub</a>
+    </div>
+  </footer>
+</body>
 </html>
