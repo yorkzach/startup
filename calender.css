@@ -123,13 +123,15 @@
   }
   
   #calendar {
+    color: black;
     border: 1px solid #ccc;
     border-radius: 5px;
-    max-width: 300px;
+    max-width: 500px;
     margin: auto;
   }
   
   .calendar-header {
+    color: black;
     display: flex;
     justify-content: space-between;
     background-color: #f0f0f0;
@@ -147,15 +149,13 @@
     background-color: #fff;
   }
   
-  .day {
-    background-color: #f0f0f0;
-    padding: 5px;
-    display: inline-block;
-  }
-  
-  .dummy-day {
-    padding: 5px;
-    display: inline-block;
-  }
+  .day,
+.dummy-day {
+  color: black;
+  width: calc(100% / 7); /* Set width to evenly distribute across the grid */
+  background-color: #f0f0f0;
+  padding: 5px;
+  text-align: center; /* Center the content horizontally */
+}
   
   
