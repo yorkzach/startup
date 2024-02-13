@@ -41,3 +41,15 @@ I am going to use the required technologies in the following ways.
 
 **HTML Startup**
 Added 4 files Index, Calender, References, and about that cover the basic HTML structure of the startup. Eventually I will replace the calender with database info corresponding to each individual walker, as well I will use web socket to allow clients to schedule and leave reviews for each walker.
+
+## CSS Deliverable 
+
+[x] - done - Prerequisite: Simon CSS deployed to your production environment
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file
+[x] - done - 30% Header, footer, and main content body. Used flex to layout sections.
+[x] - done - 20% Navigation elements. Links highlight on hover.
+[x] - done - 10% Responsive to window resizing. Looks great on iPad, desktop, and iPhone.
+[x] - done - 20% Application elements. Buttons are using bootstrap
+[x] - done - 10% Application text content. Text is displayed using the Merriday font
+[x] - done - 10% Application images. I added curved edges around my profile photo.
