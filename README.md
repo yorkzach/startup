@@ -53,3 +53,10 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 [y] - done - 20% Application elements. Buttons are using bootstrap. Accordion using bootstrap
 [y] - done - 10% Application text content. Text is displayed using the Merriday font
 [y] - done - 10% Application images. I added curved edges around my profile photo.
+
+## Javascript Deliverable 
+
+JavaScript support for future login. Index page stores login info and uses that to get username for calender page
+JavaScript support for future database data. 
+20% JavaScript support for future WebSocket.
+40% JavaScript support for your application's interaction logic.
