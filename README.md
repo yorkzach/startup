@@ -57,6 +57,6 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 ## Javascript Deliverable 
 
 JavaScript support for future login. Index page stores login info and uses that to get username for calender page
-JavaScript support for future database data. 
-20% JavaScript support for future WebSocket.
-40% JavaScript support for your application's interaction logic.
+JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers
+JavaScript support for future WebSocket. Each individual user will eventually have a store of walks they have schedule and that can be accessed.
+JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page
