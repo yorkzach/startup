@@ -7,6 +7,14 @@
     width: 100%;
     padding: 0.5em;
   }
+
+  .welcome-message {
+    color: darkgrey;
+    padding: 8px;
+    background-color: #ffffff; 
+    border-radius: 10px;
+    font-size: 12px;
+  }
   
   .player-name {
     color: rgb(118, 190, 210);
