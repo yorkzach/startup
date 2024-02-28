@@ -44,49 +44,8 @@
           <span class="current-month">February 2024</span>
           <span class="next-month">&gt;</span>
         </div>
-        <div class="calendar-days">
-          <div class="day">Sun</div>
-          <div class="day">Mon</div>
-          <div class="day">Tue</div>
-          <div class="day">Wed</div>
-          <div class="day">Thu</div>
-          <div class="day">Fri</div>
-          <div class="day">Sat</div>
-          <!-- Dummy days to fill the calendar -->
-          <div class="dummy-day"></div>
-          <div class="dummy-day"></div>
-          <div class="dummy-day"></div>
-          <div class="dummy-day">1</div>
-          <div class="dummy-day">2</div>
-          <div class="dummy-day">3</div>
-          <div class="dummy-day">4</div>
-          <div class="dummy-day">5</div>
-          <div class="dummy-day">6</div>
-          <div class="dummy-day">7</div>
-          <div class="dummy-day">8</div>
-          <div class="dummy-day">9</div>
-          <div class="dummy-day">10</div>
-          <div class="dummy-day">11</div>
-          <div class="dummy-day">12</div>
-          <div class="dummy-day">13</div>
-          <div class="dummy-day">14</div>
-          <div class="dummy-day">15</div>
-          <div class="dummy-day">16</div>
-          <div class="dummy-day">17</div>
-          <div class="dummy-day">18</div>
-          <div class="dummy-day">19</div>
-          <div class="dummy-day">20</div>
-          <div class="dummy-day">21</div>
-          <div class="dummy-day">22</div>
-          <div class="dummy-day">23</div>
-          <div class="dummy-day">24</div>
-          <div class="dummy-day">25</div>
-          <div class="dummy-day">26</div>
-          <div class="dummy-day">27</div>
-          <div class="dummy-day">28</div>
-          <div class="dummy-day"></div>
-          <div class="dummy-day"></div>
-          <div class="dummy-day"></div>
+        <div class="calendar-days" id="calendarDays">
+          <!-- Days will be generated dynamically here -->
         </div>
       </div>
     </div>
@@ -104,5 +63,35 @@
       <a class="text-reset" href="https://github.com/yorkzach/startup">My GitHub</a>
     </div>
   </footer>
+
+  <script>
+    // Function to generate calendar days
+    function generateCalendar() {
+      var calendarDays = document.getElementById('calendarDays');
+      for (var i = 1; i <= 28; i++) {
+        var dayElement = document.createElement('div');
+        dayElement.classList.add('day');
+        dayElement.textContent = i;
+        dayElement.onclick = function() {
+          setWalkTime(this.textContent);
+        };
+        calendarDays.appendChild(dayElement);
+      }
+    }
+
+    // Function to set walk time
+    function setWalkTime(day) {
+      var walkTime = prompt("Enter walk time for day " + day);
+      if (walkTime !== null) {
+        localStorage.setItem("walkTime_day_" + day, walkTime);
+        alert("Walk time for day " + day + " has been stored.");
+      }
+    }
+
+    // Generate calendar on page load
+    window.onload = function() {
+      generateCalendar();
+    };
+  </script>
 </body>
 </html>
