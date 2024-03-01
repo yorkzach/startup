@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Walks</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="calender.css">
+  <!-- Include Bootstrap CSS framework -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+<body class="bg-dark text-light">
+    <header class="container-fluid">
+        <nav class="navbar fixed-top navbar-dark">
+          <a class="navbar-brand" href="#">Walking Robyn<sup>&reg;</sup></a>
+          <menu class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calendar.html">Calendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="references.html">References</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="mywalks.html">My Walks</a>
+            </li>
+          </menu>
+        </nav>
+      </header>
+
+  <main class="container-fluid bg-secondary text-center">
+    <div class="welcome-message">
+      <div>Welcome to My Walks Page</div>
+    </div>
+    <div class="calendar-container">
+      <h2>My Scheduled Walks</h2>
+      <div id="myWalks">
+        <!-- Walks scheduled by the user will be displayed here -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white-50">
+    <div class="container-fluid">
+      <span class="text-reset">Zachary York</span>
+      <a class="text-reset" href="https://github.com/yorkzach/startup">My GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    // Retrieve username from localStorage
+    const userName = localStorage.getItem("userName");
+
+    // Display username in the welcome message
+    if (userName) {
+      document.querySelector(".welcome-message div").textContent = `Welcome to My Walks Page, ${userName}`;
+    }
+
+    // Function to display user's scheduled walks
+    function displayMyWalks() {
+      const myWalksContainer = document.getElementById('myWalks');
+      myWalksContainer.innerHTML = ''; // Clear previous content
+
+      for (let i = 1; i <= 31; i++) {
+        const scheduleData = localStorage.getItem(`walkSchedule_${i}`);
+        if (scheduleData) {
+          const { date, time, walker, scheduler } = JSON.parse(scheduleData);
+          if (scheduler === userName) { // Check if the scheduler matches the current user
+            const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
+
+            // Display the walk schedule
+            const event = document.createElement('div');
+            event.classList.add('event');
+            event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${scheduleDate.toDateString()} at ${time}`;
+            myWalksContainer.appendChild(event);
+          }
+        }
+      }
+    }
+
+    // Display user's scheduled walks on page load
+    window.onload = function() {
+      displayMyWalks();
+    };
+  </script>
+</body>
+</html>

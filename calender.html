@@ -31,6 +31,9 @@
         <li class="nav-item">
           <a class="nav-link" href="about.html">About us</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mywalks.html">My Walks</a>
+        </li>
       </menu>
     </nav>
   </header>
@@ -54,9 +57,6 @@
     </div>
 
     <div class="player-messages">
-      <div class="event"><span class="player-event">Walker Caitlin</span> is scheduled for tomorrow</div>
-      <div class="event"><span class="player-event">Walker Robyn </span> is available this week</div>
-      <div class="event"><span class="player-event">Walker Rachel</span> is scheduled for today</div>
     </div>
   </main>
 
@@ -70,16 +70,16 @@
   <script>
     // Retrieve username from localStorage
     const userName = localStorage.getItem("userName");
-
+  
     // Display username in the welcome message
     if (userName) {
       document.getElementById("userName").textContent = userName;
     }
-
+  
     // Function to generate calendar days
     function generateCalendar() {
       var calendarDays = document.getElementById('calendarDays');
-      for (var i = 1; i <= 28; i++) {
+      for (var i = 1; i <= 31; i++) {
         var dayElement = document.createElement('div');
         dayElement.classList.add('day');
         dayElement.textContent = i;
@@ -89,38 +89,73 @@
         calendarDays.appendChild(dayElement);
       }
     }
-
+  
     // Function to set walk time
     function setWalkTime(day) {
       var walkTime = prompt("Enter walk time for day " + day);
       if (walkTime !== null) {
-        localStorage.setItem("walkTime_day_" + day, walkTime);
-        alert("Walk time for day " + day + " has been stored.");
+        const walkerName = prompt("Enter walker's name");
+        if (walkerName !== null) {
+          storeWalkSchedule({
+            date: day,
+            time: convertTo12HourClock(walkTime),
+            walker: walkerName,
+            scheduler: userName // Adding the username of the scheduler
+          });
+        }
       }
     }
+  
+    // Function to convert time to 12-hour clock format
+  function convertTo12HourClock(time) {
+    const [hours, minutes] = time.split(':');
+    const hour = parseInt(hours, 10);
+    const minute = minutes ? parseInt(minutes, 10) : 0; // If no minute information is provided, default to 0
+    const amPM = hour >= 12 ? 'PM' : 'AM';
+    const convertedHour = hour % 12 || 12; // Convert hour to 12-hour format
 
+    return `${convertedHour}:${minute.toString().padStart(2, '0')} ${amPM}`;
+  }
+
+  
+    // Function to store walk schedule
+    function storeWalkSchedule(scheduleData) {
+      const { date, time, walker, scheduler } = scheduleData;
+      const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
+      localStorage.setItem(`walkSchedule_${date}`, JSON.stringify(scheduleData));
+  
+      // Display the new walk schedule in the player-messages
+      const event = document.createElement('div');
+      event.classList.add('event');
+      event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${scheduleDate.toDateString()} at ${time} (Scheduled by: ${scheduler})`;
+      document.querySelector('.player-messages').appendChild(event);
+      document.querySelector(`#calendarDays .day:nth-child(${date})`).classList.add('scheduled');
+    }
+  
     // Generate calendar on page load
     window.onload = function() {
       generateCalendar();
+      displayStoredWalkSchedules();
     };
-
-    // Mock database data
-    const mockData = {
-        "Walker Caitlin": "2024-03-02",
-        "Walker Robyn": "2024-03-07",
-        "Walker Rachel": "2024-03-01"
-      };
-
-    // Inject mock database data into the DOM
-    Object.keys(mockData).forEach(walker => {
-      const scheduleDate = new Date(mockData[walker]);
-      const scheduleDay = scheduleDate.getDate();
-      const event = document.createElement('div');
-      event.classList.add('event');
-      event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${scheduleDate.toDateString()}`;
-      document.querySelector('.calendar-container').appendChild(event);
-      document.querySelector(`#calendarDays .day:nth-child(${scheduleDay})`).classList.add('scheduled');
-    });
+  
+    // Function to display stored walk schedules
+    function displayStoredWalkSchedules() {
+      for (let i = 1; i <= 31; i++) {
+        const scheduleData = localStorage.getItem(`walkSchedule_${i}`);
+        if (scheduleData) {
+          const { date, time, walker, scheduler } = JSON.parse(scheduleData);
+          const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
+  
+          // Display the stored walk schedule in the player-messages
+          const event = document.createElement('div');
+          event.classList.add('event');
+          event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${scheduleDate.toDateString()} at ${time} (Scheduled by: ${scheduler})`;
+          document.querySelector('.player-messages').appendChild(event);
+          document.querySelector(`#calendarDays .day:nth-child(${date})`).classList.add('scheduled');
+        }
+      }
+    }
   </script>
+  
 </body>
 </html>
