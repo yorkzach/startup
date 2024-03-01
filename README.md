@@ -56,7 +56,7 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 
 ## Javascript Deliverable 
 
-- **20**JavaScript support for future login. Index page stores login info and uses that to get username for calender page
-- **20**JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers
-- **20**JavaScript support for future WebSocket. Each individual user will eventually have a store of walks they have schedule and that can be accessed.
-- **40**JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page
+- **20**JavaScript support for future login. Index page stores login info and uses that to get username for calender page and uses the username for mywalks page to access the data related to username
+- **20**JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers, as well on my walks page will access the database and display 
+- **20**JavaScript support for future WebSocket. I am going to use WebSocket to provide real-time updates or notifications to users of upcoming walks, synchronize data between clients, or support interactive features.
+- **40**JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page.
