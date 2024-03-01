@@ -44,19 +44,19 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 
 ## CSS Deliverable 
 
-[y] - done - Prerequisite: Simon CSS deployed to your production environment
-[y] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
-[y] - done - Prerequisite: Notes in your startup Git repository README.md file
-[y] - done - 30% Header, footer, and main content body. Used flex to layout sections.
-[y] - done - 20% Navigation elements. Links highlight on hover.
-[y] - done - 10% Responsive to window resizing. Looks great on iPad, desktop, and iPhone.
-[y] - done - 20% Application elements. Buttons are using bootstrap. Accordion using bootstrap
-[y] - done - 10% Application text content. Text is displayed using the Merriday font
-[y] - done - 10% Application images. I added curved edges around my profile photo.
+**[y]** - done - Prerequisite: Simon CSS deployed to your production environment
+**[y]** - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+**[y]** - done - Prerequisite: Notes in your startup Git repository README.md file
+**[y]** - done - 30% Header, footer, and main content body. Used flex to layout sections.
+**[y]** - done - 20% Navigation elements. Links highlight on hover.
+**[y]** - done - 10% Responsive to window resizing. Looks great on iPad, desktop, and iPhone.
+**[y]** - done - 20% Application elements. Buttons are using bootstrap. Accordion using bootstrap
+**[y]** - done - 10% Application text content. Text is displayed using the Merriday font
+**[y]** - done - 10% Application images. I added curved edges around my profile photo.
 
 ## Javascript Deliverable 
 
-JavaScript support for future login. Index page stores login info and uses that to get username for calender page
-JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers
-JavaScript support for future WebSocket. Each individual user will eventually have a store of walks they have schedule and that can be accessed.
-JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page
+**20**JavaScript support for future login. Index page stores login info and uses that to get username for calender page
+**20**JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers
+**20**JavaScript support for future WebSocket. Each individual user will eventually have a store of walks they have schedule and that can be accessed.
+**40**JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page

@@ -103,6 +103,24 @@
     window.onload = function() {
       generateCalendar();
     };
+
+    // Mock database data
+    const mockData = {
+        "Walker Caitlin": "2024-03-02",
+        "Walker Robyn": "2024-03-07",
+        "Walker Rachel": "2024-03-01"
+      };
+
+    // Inject mock database data into the DOM
+    Object.keys(mockData).forEach(walker => {
+      const scheduleDate = new Date(mockData[walker]);
+      const scheduleDay = scheduleDate.getDate();
+      const event = document.createElement('div');
+      event.classList.add('event');
+      event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${scheduleDate.toDateString()}`;
+      document.querySelector('.calendar-container').appendChild(event);
+      document.querySelector(`#calendarDays .day:nth-child(${scheduleDay})`).classList.add('scheduled');
+    });
   </script>
 </body>
 </html>
