@@ -98,13 +98,38 @@
     </footer>
     <script>
       function leaveReview(walkerName) {
-        var review = prompt("Leave a review for " + walkerName + ":");
-        if (review !== null) {
-          // Here I would store the review in my database but for now I will just alert
-          alert("Thank you for leaving a review for " + walkerName + ": " + review);
+        var review = prompt("Leave a review out of 5 for " + walkerName + ":");
+    
+        // Check if the review is not null and is a number
+        if (review !== null && !isNaN(review)) {
+          // Convert the review to an integer
+          review = parseInt(review);
+    
+          // Check if the review is within the valid range (1 to 5)
+          if (review >= 1 && review <= 5) {
+            // Update local storage with the new review
+            var ratings = JSON.parse(localStorage.getItem(walkerName)) || [];
+            ratings.push(review);
+            localStorage.setItem(walkerName, JSON.stringify(ratings));
+    
+            // Recalculate overall rating for the walker
+            var overallRating = calculateOverallRating(ratings);
+    
+            // Update displayed review number
+            document.getElementById(walkerName.toLowerCase() + 'OverallRating').textContent = overallRating + '/5';
+    
+            // Alert the user about successful review submission
+            alert("Thank you for leaving a review for " + walkerName + ": " + review);
+          } else {
+            // If the review is not within the valid range, alert the user
+            alert("Please enter a number between 1 and 5.");
+          }
+        } else {
+          // If the input is null or not a number, alert the user
+          alert("Invalid input. Please enter a number between 1 and 5.");
         }
       }
-
+    
       // Function to calculate overall rating
       function calculateOverallRating(ratings) {
         var sum = 0;
@@ -113,22 +138,23 @@
         });
         return (sum / ratings.length).toFixed(1);
       }
-
+    
       // Example ratings for each walker
-      var robynRatings = [5, 5, 5]; // Example ratings for Robyn
-      var caitlinRatings = [4, 4, 5]; // Example ratings for Caitlin
-      var rachelRatings = [4.5, 4, 5]; // Example ratings for Rachel
-
+      var robynRatings = JSON.parse(localStorage.getItem('Robyn York')) || [5,4,3,5];
+      var caitlinRatings = JSON.parse(localStorage.getItem('Caitlin York')) || [5,2,3,2];
+      var rachelRatings = JSON.parse(localStorage.getItem('Rachel Carnahan')) || [5,4,3,2];
+    
       // Calculate overall rating for each walker
       var robynOverallRating = calculateOverallRating(robynRatings);
       var caitlinOverallRating = calculateOverallRating(caitlinRatings);
       var rachelOverallRating = calculateOverallRating(rachelRatings);
-
+    
       // Display overall ratings
       document.getElementById('robynOverallRating').textContent = robynOverallRating + '/5';
       document.getElementById('caitlinOverallRating').textContent = caitlinOverallRating + '/5';
       document.getElementById('rachelOverallRating').textContent = rachelOverallRating + '/5';
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
