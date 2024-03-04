@@ -95,6 +95,10 @@
       var walkTime = prompt("Enter walk time for day " + day);
       if (walkTime !== null) {
         const walkerName = prompt("Enter walker's name");
+        if (!(walkerName === 'Rachel' || walkerName === 'Robyn' || walkerName === 'Caitlin')) {
+          alert('That\'s not one of our walkers. Please choose from one of our registered walkers.');
+          return;
+          }
         if (walkerName !== null) {
           storeWalkSchedule({
             date: day,
