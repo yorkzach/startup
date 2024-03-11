@@ -27,9 +27,9 @@ apiRouter.get('/realtime-data', (_req, res) => {
     { date: '2024-03-21', walker: 'Rachel', time: '06:00 PM', scheduler: 'Admin'}
   ];
 
-  console.log(JSON.stringify(realtimeData));
+  console.log(realtimeData);
   // Send the real-time data as JSON response
-  res.json(JSON.stringify(realtimeData));
+  res.json(realtimeData);
 });
 
 // Return the calendar page
