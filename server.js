@@ -37,6 +37,11 @@ app.get('/mywalks', (_req, res) => {
   res.sendFile('mywalks.html', { root: 'public' });
 });
 
+// Return the references page
+app.get('/references', (_req, res) => {
+  res.sendFile('references.html', { root: 'public' });
+});
+
 // Catch-all route to return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
@@ -46,25 +51,3 @@ app.use((_req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// Function to update scores (not relevant to the current application)
-function updateScores(newScore, scores) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
