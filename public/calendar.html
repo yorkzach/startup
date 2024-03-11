@@ -136,15 +136,27 @@
     }
 
     // Generate calendar on page load
-    window.onload = function() {
+    window.onload = async function() {
       generateCalendar();
       displayStoredWalkSchedules();
 
       // Fetch real-time data
-      fetch('/realtime-data')
-        .then(response => response.json())
+      const response = await fetch("api/realtime-data");
+      const json = await response.json();
+      const dataList = await JSON.parse(json);
+      console.log(json);
+      console.log(typeof json);
+      console.log(dataList);
+      console.log(typeof dataList);
+
+      fetch('api/realtime-data')
+        .then(response => {
+          console.log(response.body);
+          response.json()})
         .then(data => {
-          data.forEach(item => {
+          console.log(data);
+          dataList = JSON.parse(data);
+          dataList.forEach(item => {
             const { date, time, walker, scheduler } = item;
             const event = document.createElement('div');
             event.classList.add('event');

@@ -5,6 +5,9 @@ const WebSocket = require('ws');
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
+// Create WebSocket server
+const wss = new WebSocket.Server({ port: 8080 });
+
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
@@ -24,8 +27,9 @@ apiRouter.get('/realtime-data', (_req, res) => {
     { date: '2024-03-21', walker: 'Rachel', time: '06:00 PM', scheduler: 'Admin'}
   ];
 
+  console.log(JSON.stringify(realtimeData));
   // Send the real-time data as JSON response
-  res.json(realtimeData);
+  res.json(JSON.stringify(realtimeData));
 });
 
 // Return the calendar page
@@ -50,8 +54,6 @@ app.use((_req, res) => {
 
 
 
-// Create WebSocket server
-const wss = new WebSocket.Server({ port: 8080 });
 
 // Store ratings for each walker
 let walkerRatings = {
