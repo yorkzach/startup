@@ -67,7 +67,7 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 
 - Frontend served up using Express static middleware: My frontend code (HTML, CSS, JavaScript) is served up using Express static middleware. The express.static middleware is correctly configured to serve static files from the public directory. Score: 10/10
 
-- Your frontend calls third-party service endpoints: Although I haven't explicitly demonstrated the frontend calling third-party service endpoints in your provided code, I indicated the intention to do so in the comments. Score: 0/10 (Incomplete)
+- Your frontend calls third-party service endpoints: Although I haven't explicitly demonstrated the frontend calling third-party service endpoints in my code, I indicated the intention to do so in the comments. Score: 0/10 (Incomplete)
 
 - Your backend provides service endpoints: I have provided service endpoints for serving real-time data (/api/realtime-data) as demonstrated in the server.js file. Score: 20/20
 
