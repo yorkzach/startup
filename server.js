@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const WebSocket = require('ws');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -46,6 +47,41 @@ app.get('/references', (_req, res) => {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
+
+
+
+// Create WebSocket server
+const wss = new WebSocket.Server({ port: 8080 });
+
+// Store ratings for each walker
+let walkerRatings = {
+  'Robyn York': 5,
+  'Caitlin York': 4,
+  'Rachel Carnahan': 4.5
+};
+
+// WebSocket connection handler
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    const reviewData = JSON.parse(message);
+    const { walker, review } = reviewData;
+    
+    if (walkerRatings.hasOwnProperty(walker)) {
+      // Update walker rating
+      walkerRatings[walker] = (walkerRatings[walker] + review) / 2;
+
+      // Broadcast updated ratings to all connected clients
+      wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(walkerRatings));
+        }
+      });
+    }
+  });
+});
+
+// Serve static files
+app.use(express.static('public'));
 
 // Start the server
 app.listen(port, () => {
