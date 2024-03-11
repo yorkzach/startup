@@ -2,7 +2,7 @@ const express = require('express');
 const WebSocket = require('ws');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 // Create WebSocket server
 const wss = new WebSocket.Server({ port: 8080 });
@@ -38,6 +38,6 @@ wss.on('connection', function connection(ws) {
 app.use(express.static('public'));
 
 // Start the server
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
