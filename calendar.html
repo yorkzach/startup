@@ -70,12 +70,12 @@
   <script>
     // Retrieve username from localStorage
     const userName = localStorage.getItem("userName");
-  
+
     // Display username in the welcome message
     if (userName) {
       document.getElementById("userName").textContent = userName;
     }
-  
+
     // Function to generate calendar days
     function generateCalendar() {
       var calendarDays = document.getElementById('calendarDays');
@@ -89,7 +89,7 @@
         calendarDays.appendChild(dayElement);
       }
     }
-  
+
     // Function to set walk time
     function setWalkTime(day) {
       var walkTime = prompt("Enter walk time for day " + day);
@@ -98,7 +98,7 @@
         if (!(walkerName === 'Rachel' || walkerName === 'Robyn' || walkerName === 'Caitlin')) {
           alert('That\'s not one of our walkers. Please choose from one of our registered walkers.');
           return;
-          }
+        }
         if (walkerName !== null) {
           storeWalkSchedule({
             date: day,
@@ -109,7 +109,7 @@
         }
       }
     }
-  
+
     // Function to convert time to 12-hour clock format
     function convertTo12HourClock(time) {
       const [hours, minutes] = time.split(':');
@@ -121,13 +121,12 @@
       return `${convertedHour}:${minute.toString().padStart(2, '0')} ${amPM}`;
     }
 
-  
     // Function to store walk schedule
     function storeWalkSchedule(scheduleData) {
       const { date, time, walker, scheduler } = scheduleData;
       const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
       localStorage.setItem(`walkSchedule_${date}`, JSON.stringify(scheduleData));
-  
+
       // Display the new walk schedule in the player-messages
       const event = document.createElement('div');
       event.classList.add('event');
@@ -135,13 +134,28 @@
       document.querySelector('.player-messages').appendChild(event);
       document.querySelector(`#calendarDays .day:nth-child(${date})`).classList.add('scheduled');
     }
-  
+
     // Generate calendar on page load
     window.onload = function() {
       generateCalendar();
       displayStoredWalkSchedules();
+
+      // Fetch real-time data
+      fetch('/realtime-data')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(item => {
+            const { date, time, walker, scheduler } = item;
+            const event = document.createElement('div');
+            event.classList.add('event');
+            event.innerHTML = `<span class="player-event">${walker}</span> is scheduled for ${date} at ${time} (Scheduled by: ${scheduler})`;
+            document.querySelector('.player-messages').appendChild(event);
+            document.querySelector(`#calendarDays .day:nth-child(${date})`).classList.add('scheduled');
+          });
+        })
+        .catch(error => console.error('Error fetching real-time data:', error));
     };
-  
+
     // Function to display stored walk schedules
     function displayStoredWalkSchedules() {
       for (let i = 1; i <= 31; i++) {
@@ -149,7 +163,7 @@
         if (scheduleData) {
           const { date, time, walker, scheduler } = JSON.parse(scheduleData);
           const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
-  
+
           // Display the stored walk schedule in the player-messages
           const event = document.createElement('div');
           event.classList.add('event');
@@ -159,26 +173,6 @@
         }
       }
     }
-    function mockRealTimeData() {
-      // Sample data (replace with actual data received from the server)
-      const calendarData = [
-        { date: '2024-03-10', walker: 'Caitlin', time: '10:00 AM', scheduler: 'Admin' },
-        { date: '2024-03-03', walker: 'Robyn', time: '11:00 AM', scheduler: 'Admin'},
-        { date: '2024-03-21', walker: 'Rachel', time: '06:00 PM', scheduler: 'Admin'}
-      ];
-
-      // Container element to inject calendar data
-      const calendarContainer = document.getElementById('calendarData');
-
-      // Iterate over calendarData and create HTML elements to display the data
-      calendarData.forEach(data => {
-        const calendarEntry = document.createElement('div');
-        calendarEntry.classList.add('calendar-entry');
-        calendarEntry.innerHTML = `<p>Date: ${data.date}, Walker: ${data.walker}, Time: ${data.time}</p>`;
-        calendarContainer.appendChild(calendarEntry);
-      });
-    }
-    mockRealTimeData();
   </script>
   
 </body>
