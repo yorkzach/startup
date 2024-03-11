@@ -1,19 +1,21 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000; // Use the provided port or default to 3000
+
+// The service port. In production the front-end code is statically hosted by the service on the same port.
+const PORT = process.env.PORT || 3000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
-// Define a route to serve static files (your frontend code)
+// Serve up the front-end static content hosting
 app.use(express.static('public'));
 
 // Router for service endpoints
-var apiRouter = express.Router();
+const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// Define a route to serve real-time data
-app.get('/realtime-data', (req, res) => {
+// Define a route to serve real-time data (mocked for demonstration)
+apiRouter.get('/realtime-data', (_req, res) => {
   // Replace this with actual data fetching logic from your database or third-party API
   const realtimeData = [
     { date: '2024-03-10', walker: 'Caitlin', time: '10:00 AM', scheduler: 'Admin' },
@@ -25,7 +27,44 @@ app.get('/realtime-data', (req, res) => {
   res.json(realtimeData);
 });
 
+// Return the calendar page
+app.get('/calendar', (_req, res) => {
+  res.sendFile('calendar.html', { root: 'public' });
+});
+
+// Return the my walks page
+app.get('/mywalks', (_req, res) => {
+  res.sendFile('mywalks.html', { root: 'public' });
+});
+
+// Catch-all route to return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// Function to update scores (not relevant to the current application)
+function updateScores(newScore, scores) {
+  let found = false;
+  for (const [i, prevScore] of scores.entries()) {
+    if (newScore.score > prevScore.score) {
+      scores.splice(i, 0, newScore);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    scores.push(newScore);
+  }
+
+  if (scores.length > 10) {
+    scores.length = 10;
+  }
+
+  return scores;
+}
