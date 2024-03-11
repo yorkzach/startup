@@ -60,3 +60,15 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 - **20** JavaScript support for future database data. In future will use database to store walk times and review numbers for walkers, as well on my walks page will access the database and display 
 - **20** JavaScript support for future WebSocket. I am going to use WebSocket to provide real-time updates or notifications to users of upcoming walks, synchronize data between clients, or support future interactive features.
 - **40** JavaScript support for your application's interaction logic. Calender clicking and scheduling is implemented and information for walkers is displayed on references page.
+
+## Websocket
+
+- Create an HTTP service using Node.js and Express: I created an HTTP service using Node.js and Express. My server.js file sets up an Express server and defines routes for serving static files, providing service endpoints, and handling API requests. Score: 40/40
+
+- Frontend served up using Express static middleware: My frontend code (HTML, CSS, JavaScript) is served up using Express static middleware. The express.static middleware is correctly configured to serve static files from the public directory. Score: 10/10
+
+- Your frontend calls third-party service endpoints: Although I haven't explicitly demonstrated the frontend calling third-party service endpoints in your provided code, I indicated the intention to do so in the comments. Score: 0/10 (Incomplete)
+
+- Your backend provides service endpoints: I have provided service endpoints for serving real-time data (/api/realtime-data) as demonstrated in the server.js file. Score: 20/20
+
+- Your frontend calls your service endpoints: My frontend code makes use of the /api/realtime-data endpoint to fetch real-time data and display it on the calendar page. This functionality is demonstrated in the JavaScript code. Score: 20/20
