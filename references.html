@@ -97,62 +97,41 @@
       </div>
     </footer>
     <script>
+      const socket = new WebSocket('ws://localhost:3000'); // WebSocket connection to your Java backend
+    
+      socket.onopen = function(event) {
+        console.log('WebSocket connection established.');
+      };
+    
+      socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        displayRatings(data);
+      };
+    
+      function displayRatings(ratings) {
+        // Update ratings for each walker
+        document.getElementById('robynOverallRating').textContent = ratings['Robyn York'] + '/5';
+        document.getElementById('caitlinOverallRating').textContent = ratings['Caitlin York'] + '/5';
+        document.getElementById('rachelOverallRating').textContent = ratings['Rachel Carnahan'] + '/5';
+      }
+    
+      // Function to send a review to the server via WebSocket
       function leaveReview(walkerName) {
         var review = prompt("Leave a review out of 5 for " + walkerName + ":");
-    
-        // Check if the review is not null and is a number
+      
         if (review !== null && !isNaN(review)) {
-          // Convert the review to an integer
           review = parseInt(review);
-    
-          // Check if the review is within the valid range (1 to 5)
+      
           if (review >= 1 && review <= 5) {
-            // Update local storage with the new review
-            var ratings = JSON.parse(localStorage.getItem(walkerName)) || [];
-            ratings.push(review);
-            localStorage.setItem(walkerName, JSON.stringify(ratings));
-    
-            // Recalculate overall rating for the walker
-            var overallRating = calculateOverallRating(ratings);
-    
-            // Update displayed review number
-            document.getElementById(walkerName.toLowerCase() + 'OverallRating').textContent = overallRating + '/5';
-    
-            // Alert the user about successful review submission
-            alert("Thank you for leaving a review for " + walkerName + ": " + review);
+            const reviewData = { walker: walkerName, review: review };
+            socket.send(JSON.stringify(reviewData)); // Send review data to the server
           } else {
-            // If the review is not within the valid range, alert the user
             alert("Please enter a number between 1 and 5.");
           }
         } else {
-          // If the input is null or not a number, alert the user
           alert("Invalid input. Please enter a number between 1 and 5.");
         }
       }
-    
-      // Function to calculate overall rating
-      function calculateOverallRating(ratings) {
-        var sum = 0;
-        ratings.forEach(function(rating) {
-          sum += rating;
-        });
-        return (sum / ratings.length).toFixed(1);
-      }
-    
-      // Example ratings for each walker
-      var robynRatings = JSON.parse(localStorage.getItem('Robyn York')) || [5,4,3,5];
-      var caitlinRatings = JSON.parse(localStorage.getItem('Caitlin York')) || [5,2,3,2];
-      var rachelRatings = JSON.parse(localStorage.getItem('Rachel Carnahan')) || [5,4,3,2];
-    
-      // Calculate overall rating for each walker
-      var robynOverallRating = calculateOverallRating(robynRatings);
-      var caitlinOverallRating = calculateOverallRating(caitlinRatings);
-      var rachelOverallRating = calculateOverallRating(rachelRatings);
-    
-      // Display overall ratings
-      document.getElementById('robynOverallRating').textContent = robynOverallRating + '/5';
-      document.getElementById('caitlinOverallRating').textContent = caitlinOverallRating + '/5';
-      document.getElementById('rachelOverallRating').textContent = rachelOverallRating + '/5';
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
