@@ -35,7 +35,7 @@
 
   <main class="container-fluid bg-secondary text-center">
     <div class="welcome-message">
-      <div>Welcome to My Walks Page</div>
+      <div>Welcome to My Walks Page, <span id="userName"></span></div>
     </div>
     <div class="calendar-container">
       <h2>My Scheduled Walks</h2>
@@ -58,7 +58,7 @@
 
     // Display username in the welcome message
     if (userName) {
-      document.querySelector(".welcome-message div").textContent = `Welcome to My Walks Page, ${userName}`;
+      document.getElementById("userName").textContent = userName;
     }
 
     // Function to display user's scheduled walks
