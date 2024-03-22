@@ -53,6 +53,15 @@ app.post('/api/login', async (req, res) => {
     res.json({ message: 'Login successful', userId: user._id });
 });
 
+app.get('/api/users/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  // Fetch user data from the database based on the provided userId
+  const userData = await getUserData(userId);
+  // Then send the user data back as the response
+  res.json(userData);
+});
+
+
 // Protected endpoint - example
 app.get('/api/protected', async (req, res) => {
     // Only accessible if user is authenticated
