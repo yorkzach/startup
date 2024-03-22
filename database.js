@@ -1,25 +1,47 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
 async function main() {
-
-    const uri = "mongodb+srv://cs260:startup@cluster0.ioeicrv.mongodb.net/?";
-    
-    const client = new MongoClient(uri);
+    const client = new MongoClient(url);
 
     try {
-        // Connect to the MongoDB cluster
         await client.connect();
+        console.log('Connected to the database');
 
-        // Make the appropriate DB calls
+        // Get reference to the database
+        const db = client.db(config.databaseName);
+
+        // Function to add a new user
+        async function addUser(username, password) {
+            const usersCollection = db.collection('users');
+            const newUser = { username, password };
+            const result = await usersCollection.insertOne(newUser);
+            console.log(`Added new user with ID: ${result.insertedId}`);
+            return result.insertedId;
+        }
+
+        // Function to update user's password
+        async function updateUserPassword(userId, newPassword) {
+            const usersCollection = db.collection('users');
+            const result = await usersCollection.updateOne({ _id: ObjectId(userId) }, { $set: { password: newPassword } });
+            console.log(`Updated password for user with ID: ${userId}`);
+            return result.modifiedCount;
+        }
+
+        // Function to delete a user
+        async function deleteUser(userId) {
+            const usersCollection = db.collection('users');
+            const result = await usersCollection.deleteOne({ _id: ObjectId(userId) });
+            console.log(`Deleted user with ID: ${userId}`);
+            return result.deletedCount;
+        }
+
+        // Add more functions for CRUD operations on other collections if needed
 
     } finally {
-        // Close the connection to the MongoDB cluster
         await client.close();
     }
 }
 
 main().catch(console.error);
-
-// Add functions that make DB calls here
