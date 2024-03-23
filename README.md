@@ -72,3 +72,31 @@ Added 4 files Index, Calender, References, and about that cover the basic HTML s
 - Your backend provides service endpoints: I have provided service endpoints for serving real-time data (/api/realtime-data) as demonstrated in the server.js file. Score: 20/20
 
 - Your frontend calls your service endpoints: My frontend code makes use of the /api/realtime-data endpoint to fetch real-time data and display it on the calendar page. This functionality is demonstrated in the JavaScript code. Score: 20/20
+
+
+## Startup Login
+
+Supports new user registration (20%):
+
+- The project includes a registration endpoint (/api/register) that accepts username and password, hashes the password securely, and inserts the user into the database.
+- The registration form is present in HTML files, allowing users to register by providing a username and password.
+
+Supports existing user authentication (20%):
+
+- The project includes a login endpoint (/api/login) that verifies the username and password against the stored hashed password.
+- The login functionality is implemented in one of the HTML files (login.js) where users can input their credentials and submit the form to authenticate.
+
+Stores application data in MongoDB (20%):
+
+- The project connects to a MongoDB database using the MongoDB Node.js driver (mongodb).
+- There are functions defined to interact with the database, including adding users, updating passwords, and deleting users.
+
+Stores and retrieves credentials in MongoDB (20%):
+
+- User credentials are hashed using bcrypt before storing them in the database during registration.
+- During login, the password entered by the user is hashed and compared with the hashed password stored in the database.
+
+Restricts application functionality based upon authentication (20%):
+
+- Certain endpoints are restricted and can only be accessed if the user is authenticated.
+- The login functionality ensures that only authenticated users can access certain parts of the application.
