@@ -1,66 +1,62 @@
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
-const { MongoClient } = require('mongodb');
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
-const dbName = 'trailoftails';
+const { addUser, getUserData } = require('./database'); // Import functions from database.js
 
-// ...
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
-// Database connection
-async function connectDB() {
-    const client = new MongoClient(url);
-    await client.connect();
-    const db = client.db(dbName);
-    return db;
-}
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const db = await connectDB();
-    const usersCollection = db.collection('users');
-
-    const existingUser = await usersCollection.findOne({ username });
-    if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
+    try {
+        // Add user to the database
+        const userId = await addUser(username, hashedPassword);
+        res.status(201).json({ message: 'User registered successfully', userId });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-
-    await usersCollection.insertOne({ username, password: hashedPassword });
-    res.status(201).json({ message: 'User registered successfully' });
 });
 
 // Login endpoint
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-    const db = await connectDB();
-    const usersCollection = db.collection('users');
+    try {
+        // Fetch user data from the database
+        const userData = await getUserData(username);
+        if (!userData) {
+            return res.status(401).json({ message: 'Invalid username or password' });
+        }
 
-    const user = await usersCollection.findOne({ username });
-    if (!user) {
-        return res.status(401).json({ message: 'Invalid username or password' });
+        // Verify password
+        const isPasswordValid = await bcrypt.compare(password, userData.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Invalid username or password' });
+        }
+
+        // Return any additional data you want to send to the frontend upon successful login
+        res.json({ message: 'Login successful', userId: userData._id });
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    // Return any additional data you want to send to the frontend upon successful login
-    res.json({ message: 'Login successful', userId: user._id });
 });
 
-app.get('/api/users/:userId', async (req, res) => {
-  const userId = req.params.userId;
-  // Fetch user data from the database based on the provided userId
-  const userData = await getUserData(userId);
-  // Then send the user data back as the response
-  res.json(userData);
+app.get('/api/users/:username', async (req, res) => {
+    const username = req.params.username;
+    try {
+        // Fetch user data from the database based on the provided username
+        const userData = await getUserData(username);
+        // Then send the user data back as the response
+        res.json(userData);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 });
-
 
 // Protected endpoint - example
 app.get('/api/protected', async (req, res) => {
