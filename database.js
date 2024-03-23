@@ -1,5 +1,6 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const config = require('./dbConfig.json');
+
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
 async function main() {
@@ -12,9 +13,11 @@ async function main() {
         // Get reference to the database
         const db = client.db(config.databaseName);
 
+        // Define the users collection
+        const usersCollection = db.collection('users');
+
         // Function to add a new user
         async function addUser(username, password) {
-            const usersCollection = db.collection('users');
             const newUser = { username, password };
             const result = await usersCollection.insertOne(newUser);
             console.log(`Added new user with ID: ${result.insertedId}`);
@@ -23,7 +26,6 @@ async function main() {
 
         // Function to update user's password
         async function updateUserPassword(userId, newPassword) {
-            const usersCollection = db.collection('users');
             const result = await usersCollection.updateOne({ _id: ObjectId(userId) }, { $set: { password: newPassword } });
             console.log(`Updated password for user with ID: ${userId}`);
             return result.modifiedCount;
@@ -31,13 +33,12 @@ async function main() {
 
         // Function to delete a user
         async function deleteUser(userId) {
-            const usersCollection = db.collection('users');
             const result = await usersCollection.deleteOne({ _id: ObjectId(userId) });
             console.log(`Deleted user with ID: ${userId}`);
             return result.deletedCount;
         }
 
-        // Add more functions for CRUD operations on other collections if needed
+        // Add more functions for CRUD operations on the users collection if needed
 
     } finally {
         await client.close();
@@ -45,3 +46,5 @@ async function main() {
 }
 
 main().catch(console.error);
+
+module.exports = { addUser, updateUserPassword, deleteUser };

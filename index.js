@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
 const { MongoClient } = require('mongodb');
-const url = "mongodb://localhost:27017";
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const dbName = 'trailoftails';
 
 // ...
