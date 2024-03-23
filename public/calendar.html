@@ -139,6 +139,7 @@
     window.onload = async function() {
       generateCalendar();
       displayStoredWalkSchedules();
+      await displayUserData();
 
       // Fetch real-time data
       fetch('api/realtime-data')
@@ -199,9 +200,8 @@
             
             // Display user data in the frontend
             if (userData) {
-              // Example: Update DOM elements with user data
-              // document.getElementById("userFullName").textContent = userData.fullName;
-              // document.getElementById("userEmail").textContent = userData.email;
+              //Update DOM elements with user data
+              document.getElementById("userName").textContent = userData;
             }
           } catch (error) {
             console.error('Error fetching and displaying user data:', error);
