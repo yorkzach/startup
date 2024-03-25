@@ -5,9 +5,9 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('startup')
-const usersCollection = db.collection('user')
-const walksCollection = db.collection('walks')
+const db = client.db('startup');
+const usersCollection = db.collection('user');
+const walksCollection = db.collection('walks');
 
 (async function testConnection() {
     await client.connect();
@@ -36,7 +36,7 @@ const walksCollection = db.collection('walks')
 
   function getWalks() {
     const query = { username: userName };
-    const cursor = scoreCollection.find(query);
+    const cursor = walksCollection.find(query);
     return cursor.toArray();
   }
 
