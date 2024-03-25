@@ -1,4 +1,6 @@
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -32,6 +34,10 @@ const walksCollection = db.collection('walks')
     scoreCollection.insertOne(walk);
   }
 
+  function getWalks() {
+    const query = { username: userName };
+    const cursor = scoreCollection.find(query);
+    return cursor.toArray();
+  }
 
-
-module.exports = { addUser, getUser, getUserByToken, addWalk };
+module.exports = { addUser, getUser, getUserByToken, addWalk, getWalks };
