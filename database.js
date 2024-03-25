@@ -4,35 +4,34 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('startup')
-const userCollection = db.collection('user')
-const publicCollection = db.collection('progress')
+const usersCollection = db.collection('user')
+const walksCollection = db.collection('walks')
 
-(async function testConnection(){
+(async function testConnection() {
     await client.connect();
-    console.log('Connected to the database');
-    })
+    await db.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    process.exit(1);
+  });
 
-    // Function to add a new user
-    async function addUser(username, password) {
-        const newUser = { username, password };
-        const result = await usersCollection.insertOne(newUser);
-        console.log(`Added new user with ID: ${result.insertedId}`);
-        return result.insertedId;
-    }
+  async function addUser(username, password) {
+    const newUser = { username, password, token: uuid.v4()};
+    const result = await usersCollection.insertOne(newUser);
+    return result.insertedId;
+  }
+  function getUser(username) {
+    return userCollection.findOne({ username: username });
+  }
+  
+  function getUserByToken(token) {
+    return userCollection.findOne({ token: token });
+  }
 
-    // Function to update user's password
-    async function updateUserPassword(userId, newPassword) {
-        const result = await usersCollection.updateOne({ _id: ObjectId(userId) }, { $set: { password: newPassword } });
-        console.log(`Updated password for user with ID: ${userId}`);
-        return result.modifiedCount;
-    }
-
-    // Function to delete a user
-    async function deleteUser(userId) {
-        const result = await usersCollection.deleteOne({ _id: ObjectId(userId) });
-        console.log(`Deleted user with ID: ${userId}`);
-        return result.deletedCount;
-    }
+  function addWalk(walk) {
+    scoreCollection.insertOne(walk);
+  }
 
 
-module.exports = { addUser, updateUserPassword, deleteUser };
+
+module.exports = { addUser, getUser, getUserByToken, addWalk };
