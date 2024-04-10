@@ -17,27 +17,34 @@ const walksCollection = db.collection('walks');
     process.exit(1);
   });
 
-  async function addUser(username, password) {
-    const newUser = { username, password, token: uuid.v4()};
-    const result = await usersCollection.insertOne(newUser);
-    return result.insertedId;
+  async function createUser(username, password) {
+    const passwordHash = await bcrypt.hash(password, 10);
+    const newUser = { username:username, password:passwordHash, token: uuid.v4()};
+    await usersCollection.insertOne(newUser);
+    return newUser;
   }
   function getUser(username) {
-    return userCollection.findOne({ username: username });
+    return usersCollection.findOne({ username: username });
   }
   
   function getUserByToken(token) {
-    return userCollection.findOne({ token: token });
+    return usersCollection.findOne({ token: token });
   }
 
   function addWalk(walk) {
-    scoreCollection.insertOne(walk);
+    walksCollection.insertOne(walk);
   }
 
   function getWalks() {
-    const query = { username: userName };
+    const query = { username:username };
     const cursor = walksCollection.find(query);
     return cursor.toArray();
   }
 
-module.exports = { addUser, getUser, getUserByToken, addWalk, getWalks };
+module.exports = { 
+  createUser,
+  getUser,
+  getUserByToken,
+  addWalk,
+  getWalks,
+ };

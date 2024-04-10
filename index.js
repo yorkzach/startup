@@ -30,7 +30,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.username)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = await DB.addUser(req.body.username, req.body.password);
+    const user = await DB.createUser(req.body.username, req.body.password);
 
     // Set the cookie
     setAuthCookie(res, user.token);
@@ -43,7 +43,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.email);
+  const user = await DB.getUser(req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
@@ -85,28 +85,28 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-secureApiRouter.get('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        // Fetch user data from the database
-        const userData = await getUser(username);
-        if (!userData) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
+// secureApiRouter.get('/login', async (req, res) => {
+//     const { username, password } = req.body;
+//     try {
+//         // Fetch user data from the database
+//         const userData = await getUser(username);
+//         if (!userData) {
+//             return res.status(401).json({ message: 'Invalid username or password' });
+//         }
 
-        // Verify password
-        const isPasswordValid = await bcrypt.compare(password, userData.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
+//         // Verify password
+//         const isPasswordValid = await bcrypt.compare(password, userData.password);
+//         if (!isPasswordValid) {
+//             return res.status(401).json({ message: 'Invalid username or password' });
+//         }
 
-        // Return any additional data you want to send to the frontend upon successful login
-        res.json({ message: 'Login successful', userId: userData._id });
-    } catch (error) {
-        console.error('Error logging in user:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
+//         // Return any additional data you want to send to the frontend upon successful login
+//         res.json({ message: 'Login successful', userId: userData._id });
+//     } catch (error) {
+//         console.error('Error logging in user:', error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// });
   
   
   // Default error handler
