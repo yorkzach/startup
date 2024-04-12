@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './main.css';
-import './calender.css';
+import './schedule.css';
 
 function CalendarPage() {
   const [userName, setUserName] = useState('');
