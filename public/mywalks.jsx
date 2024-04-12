@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './main.css';
 
 function MyWalksPage() {
   const [userName, setUserName] = useState('');
