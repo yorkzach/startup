@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// CalendarPage.jsx (continued)
+import React, { useState, useEffect } from 'react';
 import './main.css';
 import './schedule.css';
 
@@ -71,6 +72,28 @@ function CalendarPage() {
     document.querySelector(`#calendarDays .day:nth-child(${date})`).classList.add('scheduled');
   }
 
+  // Function to display user's scheduled walks
+  function displayMyWalks() {
+    const myWalks = [];
+    for (let i = 1; i <= 31; i++) {
+      const scheduleData = localStorage.getItem(`walkSchedule_${i}`);
+      if (scheduleData) {
+        const { date, time, walker, scheduler } = JSON.parse(scheduleData);
+        if (scheduler === userName) { // Check if the scheduler matches the current user
+          const scheduleDate = new Date(2024, 2, date); // 2024 is year, 2 is month index (March)
+
+          // Display the walk schedule
+          myWalks.push(
+            <div key={i} className="event">
+              <span className="player-event">{walker}</span> is scheduled for {scheduleDate.toDateString()} at {time}
+            </div>
+          );
+        }
+      }
+    }
+    return myWalks;
+  }
+
   return (
     <div className="container-fluid bg-secondary text-center">
       <div className="welcome-message">Welcome <span id="userName">{userName}</span></div>
@@ -88,7 +111,10 @@ function CalendarPage() {
           </div>
         </div>
       </div>
-      <div className="player-messages"></div>
+      <div className="player-messages">
+        {/* Display user's scheduled walks */}
+        {displayMyWalks()}
+      </div>
     </div>
   );
 }
