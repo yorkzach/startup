@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
-import { Play } from './play/play';
-import { Scores } from './scores/scores';
+import { Schedule } from './schedule/schedule';
+import { Walks } from './walks/walks';
 import { About } from './about/about';
 import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,7 +19,7 @@ function App() {
         <header className='container-fluid'>
           <nav className='navbar fixed-top navbar-dark'>
             <div className='navbar-brand'>
-              Simon<sup>&reg;</sup>
+              Walking Robyn<sup>&reg;</sup>
             </div>
             <menu className='navbar-nav'>
               <li className='nav-item'>
@@ -29,15 +29,15 @@ function App() {
               </li>
               {authState === AuthState.Authenticated && (
                 <li className='nav-item'>
-                  <NavLink className='nav-link' to='play'>
-                    Play
+                  <NavLink className='nav-link' to='schedule'>
+                    Schedule
                   </NavLink>
                 </li>
               )}
               {authState === AuthState.Authenticated && (
                 <li className='nav-item'>
-                  <NavLink className='nav-link' to='scores'>
-                    Scores
+                  <NavLink className='nav-link' to='walks'>
+                    My Walks
                   </NavLink>
                 </li>
               )}
@@ -65,17 +65,17 @@ function App() {
             }
             exact
           />
-          <Route path='/play' element={<Play userName={userName} />} />
-          <Route path='/scores' element={<Scores />} />
+          <Route path='/schedule' element={<Schedule userName={userName} />} />
+          <Route path='/walks' element={<Walks />} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
 
         <footer className='bg-dark text-dark text-muted'>
           <div className='container-fluid'>
-            <span className='text-reset'>Author Name(s)</span>
-            <a className='text-reset' href='https://github.com/webprogramming260/simon-react'>
-              Source
+            <span className='text-reset'>Zachary York</span>
+            <a className='text-reset' href='https://github.com/yorkzach/startup'>
+              My Github
             </a>
           </div>
         </footer>

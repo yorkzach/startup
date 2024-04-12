@@ -1,5 +1,5 @@
 {
-  "hostname": "cluster0.ioeicrv.mongodb.net/?",
-  "userName": "cs260",
-  "password": "startup"
-}
+    "hostname": "cluster0.ioeicrv.mongodb.net/?",
+    "userName": "cs260",
+    "password": "startup"
+  }
