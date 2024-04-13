@@ -7,7 +7,7 @@
     width: 100%;
     padding: 0.5em;
   }
-
+  
   .welcome-message {
     color: darkgrey;
     padding: 8px;
@@ -125,7 +125,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
-
+  
   .calendar-container {
     margin-top: 20px;
   }
@@ -158,12 +158,11 @@
   }
   
   .day,
-.dummy-day {
-  color: black;
-  width: calc(100% / 7); /* Set width to evenly distribute across the grid */
-  background-color: #f0f0f0;
-  padding: 5px;
-  text-align: center; /* Center the content horizontally */
-}
-  
+  .dummy-day {
+    color: black;
+    width: calc(100% / 7); /* Set width to evenly distribute across the grid */
+    background-color: #f0f0f0;
+    padding: 5px;
+    text-align: center; /* Center the content horizontally */
+  }
   
