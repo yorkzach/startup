@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import './index.css';
+import './calendar.css';
+
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');

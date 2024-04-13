@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import './index.css';
+import './calendar.css';
+
 const Calendar = () => {
   const [userName, setUserName] = useState('');
 

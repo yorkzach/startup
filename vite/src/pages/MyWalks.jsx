@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import './index.css';
+import './calendar.css';
+
 const MyWalks = () => {
   useEffect(() => {
     displayMyWalks();

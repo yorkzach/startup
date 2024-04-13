@@ -1,5 +1,8 @@
 import React from 'react';
 
+import './index.css';
+import './calendar.css';
+
 const AboutUs = () => {
   return (
     <main className="container-fluid bg-secondary text-center">
