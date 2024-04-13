@@ -1,91 +1,24 @@
+// src/App.jsx
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { Login } from './login/login';
-import { Schedule } from './schedule/schedule';
-import { Walks } from './walks/walks';
-import { About } from './about/about';
-import { AuthState } from './login/authState';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import Calendar from './pages/Calendar';
+import About from './pages/About';
+import MyWalks from './pages/MyWalks.jsx';
+import NotFound from './pages/NotFound';
 
 function App() {
-  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
-  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
-  const [authState, setAuthState] = React.useState(currentAuthState);
-
   return (
-    <BrowserRouter>
-      <div className='body bg-dark text-light'>
-        <header className='container-fluid'>
-          <nav className='navbar fixed-top navbar-dark'>
-            <div className='navbar-brand'>
-              Walking Robyn<sup>&reg;</sup>
-            </div>
-            <menu className='navbar-nav'>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to=''>
-                  Login
-                </NavLink>
-              </li>
-              {authState === AuthState.Authenticated && (
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to='schedule'>
-                    Schedule
-                  </NavLink>
-                </li>
-              )}
-              {authState === AuthState.Authenticated && (
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to='walks'>
-                    My Walks
-                  </NavLink>
-                </li>
-              )}
-              <li className='nav-item'>
-                <NavLink className='nav-link' to='about'>
-                  About
-                </NavLink>
-              </li>
-            </menu>
-          </nav>
-        </header>
-
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Login
-                userName={userName}
-                authState={authState}
-                onAuthChange={(userName, authState) => {
-                  setAuthState(authState);
-                  setUserName(userName);
-                }}
-              />
-            }
-            exact
-          />
-          <Route path='/schedule' element={<Schedule userName={userName} />} />
-          <Route path='/walks' element={<Walks />} />
-          <Route path='/about' element={<About />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-
-        <footer className='bg-dark text-dark text-muted'>
-          <div className='container-fluid'>
-            <span className='text-reset'>Zachary York</span>
-            <a className='text-reset' href='https://github.com/yorkzach/startup'>
-              My Github
-            </a>
-          </div>
-        </footer>
-      </div>
-    </BrowserRouter>
+    <Router>
+      <Switch>
+        <Route path="/index" exact component={Home} />
+        <Route path="/calendar" component={Calendar} />
+        <Route path="/about" component={About} />
+        <Route path="/mywalks" component={MyWalks} />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
   );
-}
-
-function NotFound() {
-  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }
 
 export default App;
